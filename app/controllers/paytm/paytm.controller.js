@@ -15,7 +15,7 @@ module.exports = {
                 paramarray[name] = paramlist[name]
             }
         }
-        paramarray["CALLBACK_URL"] = "http://ec2-3-14-86-69.us-east-2.compute.amazonaws.com:3009/api/paytm/response";
+        paramarray["CALLBACK_URL"] = "http://localhost:3009/paytm/api/paytm/response";
         checksum.genchecksum(paramarray, PAYTM_MERCHANT_KEY, (err, result) => {
             if(err) throw err;
             res.render("paytm/request", { result });
