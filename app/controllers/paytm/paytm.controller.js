@@ -1,5 +1,5 @@
 var checksum = require('./checksum');
-
+var request = require('request');
 module.exports = {
     getRequest: (req, res) => {
         res.render("paytm/index.ejs");
@@ -21,9 +21,17 @@ module.exports = {
             res.render("paytm/request", { result });
         })
     },
+
     response: (req, res) => {
         // console.log(req.body); 
         if(req.body.RESPCODE === '01'){
+            request({
+                url: 'http://ec2-3-14-86-69.us-east-2.compute.amazonaws.com/paytmresult',
+                method:'POST',
+                json: {
+                    "body": req.body
+                }
+            });
             res.render("paytm/response", {
                 status: true,
                 result: req.body
